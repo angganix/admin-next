@@ -1,7 +1,8 @@
-import { IconX } from '@tabler/icons'
+import { IconChevronDown, IconX } from '@tabler/icons'
 import React from 'react'
 import menu from '../../data/menu'
 import Link from 'next/link'
+import Image from 'next/image'
 
 function Sidebar({ sidebarToggle }) {
     return (
@@ -14,7 +15,7 @@ function Sidebar({ sidebarToggle }) {
                 <IconX />
             </button>
             <header className="px-8 pb-5 pt-8">
-                <h4>Sidebar</h4>
+                <Image src="/images/logo.png" width={180} height={45} alt="" style={{ height: 'auto', width: 'auto' }} priority />
             </header>
             <div className="p-4">
                 <ul className="sidebar-menu">
@@ -27,13 +28,12 @@ function Sidebar({ sidebarToggle }) {
     )
 }
 
-const SidebarItem = ({ path, title, children = null }) => {
+const SidebarItem = ({ path, title, icon = null, children = null }) => {
     const [showDropdown, setShowDropdown] = React.useState(false);
-
+    const Icon = icon ? icon : null;
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
     }
-
     return (
         <li className="sidebar-item">
             <Link
@@ -41,7 +41,13 @@ const SidebarItem = ({ path, title, children = null }) => {
                 className={`sidebar-link ${children ? `sidebar-link-dropdown ${showDropdown ? 'show' : ''}` : ''}`}
                 onClick={toggleDropdown}
             >
-                {title}
+                {Icon && <Icon size={20} />}
+                <span className="ml-4">{title}</span>
+                {children && (
+                    <span className="caret">
+                        <IconChevronDown />
+                    </span>
+                )}
             </Link>
             {children && (
                 <ul className={`sub-sidebar-menu ${showDropdown ? 'show' : ''}`}>

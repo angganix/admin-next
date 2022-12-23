@@ -3,8 +3,8 @@ import Layout from "../../components/layouts/Layout";
 
 const mekanik = () => {
   return (
-    <Layout>
-      <div>mekanik</div>
+    <Layout title="Mekanik">
+      <div className="bg-white p-4 rounded-md">mekanik</div>
     </Layout>
   );
 };
